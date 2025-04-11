@@ -1,7 +1,5 @@
 # @mkizka/eslint-plugin-relative-import
 
-This ESLint plugin
-
 ```js
 import { foo } from "~/lib/utils";
 // ↓
