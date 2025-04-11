@@ -1,16 +1,17 @@
+import type { NoPathAliasRuleOptions } from "./rules/no-path-alias.js";
 import { noPathAliasRule } from "./rules/no-path-alias.js";
 
-const relativeImportPlugin = {
+export const relativeImportPlugin = {
   rules: {
     "no-path-alias": noPathAliasRule,
   },
 };
 
-export const arrangeActAssert = {
+export const relativeImport = (options: NoPathAliasRuleOptions) => ({
   plugins: {
     "relative-import": relativeImportPlugin,
   },
   rules: {
-    "relative-import/no-path-alias": "error",
+    "relative-import/no-path-alias": ["error", options],
   },
-};
+});

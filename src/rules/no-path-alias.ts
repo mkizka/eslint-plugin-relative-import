@@ -6,11 +6,11 @@ const isObject = (obj: unknown) => {
   return typeof obj === "object" && obj !== null;
 };
 
-type Options = {
+export type NoPathAliasRuleOptions = {
   alias: Record<string, string>;
 };
 
-const parseOptions = (options: unknown[]): Options => {
+const parseOptions = (options: unknown[]): NoPathAliasRuleOptions => {
   if (!isObject(options[0])) {
     throw new Error("Invalid options format");
   }
@@ -23,11 +23,14 @@ const parseOptions = (options: unknown[]): Options => {
   return { alias: options[0].alias as Record<string, string> };
 };
 
-const isUsingAlias = (importPath: string, alias: Options["alias"]) => {
+const isUsingAlias = (
+  importPath: string,
+  alias: NoPathAliasRuleOptions["alias"],
+) => {
   return Object.keys(alias).some((aliasKey) => importPath.startsWith(aliasKey));
 };
 
-const normalizeAlias = (alias: Options["alias"]) => {
+const normalizeAlias = (alias: NoPathAliasRuleOptions["alias"]) => {
   return Object.fromEntries(
     Object.entries(alias).map(([key, value]) => {
       const newKey = key.replace(/\/\*$/, "");
@@ -43,7 +46,7 @@ const resolveRelativePath = ({
 }: {
   filename: string;
   aliasImportPath: string;
-  alias: Options["alias"];
+  alias: NoPathAliasRuleOptions["alias"];
 }) => {
   const aliasKey = Object.keys(alias).find((key) =>
     aliasImportPath.startsWith(key),
