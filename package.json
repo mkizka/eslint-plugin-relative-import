@@ -20,12 +20,13 @@
     "src"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "rm -rf dist && tsc",
     "format": "eslint --fix . && prettier --write .",
     "prepare": "husky",
-    "release": "rm -rf dist && pnpm build && np",
+    "release": "np",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "version": "pnpm build"
   },
   "devDependencies": {
     "@mkizka/eslint-config": "^6.0.1",
