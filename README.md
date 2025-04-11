@@ -27,7 +27,7 @@ or
 
 ```js
 // eslint.config.js
-import { relativeImportPlugin } from "@mkizka/eslint-plugin-aaa";
+import { relativeImportPlugin } from "@mkizka/eslint-plugin-relative-import";
 
 export default [
   {
