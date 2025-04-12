@@ -44,9 +44,12 @@ or
 ```json
 // .eslintrc
 {
-  "plugins": ["@mkizka/eslint-plugin-relative-import"],
+  "plugins": ["@mkizka/relative-import"],
   "rules": {
-    "relative-import/no-path-alias": ["error", { "alias": { "~": "./src" } }]
+    "@mkizka/relative-import/no-path-alias": [
+      "error",
+      { "alias": { "~": "./src" } }
+    ]
   }
 }
 ```
