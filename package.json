@@ -14,6 +14,11 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs",
       "import": "./dist/index.js"
+    },
+    "./flat": {
+      "types": "./dist/flat.d.ts",
+      "require": "./dist/flat.cjs",
+      "import": "./dist/flat.js"
     }
   },
   "files": [
