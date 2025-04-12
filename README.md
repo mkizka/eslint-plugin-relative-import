@@ -44,15 +44,15 @@ export default [
 
 or
 
-```json
+```jsonc
 // .eslintrc
 {
   "plugins": ["@mkizka/relative-import"],
   "rules": {
     "@mkizka/relative-import/no-path-alias": [
       "error",
-      { "alias": { "~": "./src" } }
-    ]
-  }
+      { "alias": { "~": "./src" } },
+    ],
+  },
 }
 ```
