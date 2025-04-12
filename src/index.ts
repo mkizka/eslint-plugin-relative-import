@@ -15,3 +15,5 @@ export const relativeImport = (options: NoPathAliasRuleOptions) => ({
     "relative-import/no-path-alias": ["error", options],
   },
 });
+
+export default relativeImportPlugin;
