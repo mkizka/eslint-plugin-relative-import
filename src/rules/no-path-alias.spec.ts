@@ -34,8 +34,10 @@ describe("no-path-alias", () => {
   test.each`
     alias                       | filename                     | from               | resolvedFrom
     ${{ "~": "./src" }}         | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
+    ${{ "~": "src" }}           | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
+    ${{ "~/": "src" }}          | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
+    ${{ "~": "./src" }}         | ${"/project/src/main.ts"}    | ${`'~/lib/utils'`} | ${`'./lib/utils'`}
     ${{ "~": "./src" }}         | ${"/project/src/foo/bar.ts"} | ${`"~/lib/utils"`} | ${`"../lib/utils"`}
-    ${{ "~": "./src" }}         | ${"/project/src/foo/bar.ts"} | ${`'~/lib/utils'`} | ${`'../lib/utils'`}
     ${{ "~/lib": "./src/lib" }} | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
     ${{ "~/lib": "./src/lib" }} | ${"/project/src/foo/bar.ts"} | ${`"~/lib/utils"`} | ${`"../lib/utils"`}
   `(
