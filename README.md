@@ -16,7 +16,7 @@ npm i -D @mkizka/eslint-plugin-relative-import
 
 ```js
 // eslint.config.js
-import { relativeImport } from "@mkizka/eslint-plugin-relative-import/flat";
+import { relativeImport } from "@mkizka/eslint-plugin-relative-import";
 
 export default [relativeImport({ alias: { "~": "./src" } })];
 ```
@@ -25,15 +25,18 @@ or
 
 ```js
 // eslint.config.js
-import { relativeImportPlugin } from "@mkizka/eslint-plugin-relative-import/flat";
+import { relativeImportPlugin } from "@mkizka/eslint-plugin-relative-import";
 
 export default [
   {
     plugins: {
-      "relative-import": relativeImportPlugin,
+      "@mkizka/relative-import": relativeImportPlugin,
     },
     rules: {
-      "relative-import/no-path-alias": ["error", { alias: { "~": "./src" } }],
+      "@mkizka/relative-import/no-path-alias": [
+        "error",
+        { alias: { "~": "./src" } },
+      ],
     },
   },
 ];
