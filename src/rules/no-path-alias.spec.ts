@@ -19,7 +19,7 @@ vi.spyOn(process, "cwd").mockReturnValue("/project");
  */
 
 describe("no-path-alias", () => {
-  test("allows relative imports", () => {
+  test("allow relative imports", () => {
     ruleTester.run("no-path-alias", noPathAliasRule, {
       valid: [
         {
@@ -39,7 +39,7 @@ describe("no-path-alias", () => {
     ${{ "~/lib": "./src/lib" }} | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
     ${{ "~/lib": "./src/lib" }} | ${"/project/src/foo/bar.ts"} | ${`"~/lib/utils"`} | ${`"../lib/utils"`}
   `(
-    "should resolve relative path $from to $resolvedFrom",
+    "resolve relative path $from to $resolvedFrom",
     ({ alias, filename, from, resolvedFrom }) => {
       ruleTester.run("no-path-alias", noPathAliasRule, {
         valid: [],
