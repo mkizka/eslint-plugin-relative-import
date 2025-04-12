@@ -24,7 +24,7 @@ describe("no-path-alias", () => {
       valid: [
         {
           filename: "/project/src/main.ts",
-          options: [{ alias: { "~/*": "./src/*" } }],
+          options: [{ alias: { "~": "./src" } }],
           code: `import { foo } from './lib/utils'`,
         },
       ],
@@ -32,12 +32,12 @@ describe("no-path-alias", () => {
     });
   });
   test.each`
-    alias                           | filename                     | from               | resolvedFrom
-    ${{ "~/*": "./src/*" }}         | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
-    ${{ "~/*": "./src/*" }}         | ${"/project/src/foo/bar.ts"} | ${`"~/lib/utils"`} | ${`"../lib/utils"`}
-    ${{ "~/*": "./src/*" }}         | ${"/project/src/foo/bar.ts"} | ${`'~/lib/utils'`} | ${`'../lib/utils'`}
-    ${{ "~/lib/*": "./src/lib/*" }} | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
-    ${{ "~/lib/*": "./src/lib/*" }} | ${"/project/src/foo/bar.ts"} | ${`"~/lib/utils"`} | ${`"../lib/utils"`}
+    alias                       | filename                     | from               | resolvedFrom
+    ${{ "~": "./src" }}         | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
+    ${{ "~": "./src" }}         | ${"/project/src/foo/bar.ts"} | ${`"~/lib/utils"`} | ${`"../lib/utils"`}
+    ${{ "~": "./src" }}         | ${"/project/src/foo/bar.ts"} | ${`'~/lib/utils'`} | ${`'../lib/utils'`}
+    ${{ "~/lib": "./src/lib" }} | ${"/project/src/main.ts"}    | ${`"~/lib/utils"`} | ${`"./lib/utils"`}
+    ${{ "~/lib": "./src/lib" }} | ${"/project/src/foo/bar.ts"} | ${`"~/lib/utils"`} | ${`"../lib/utils"`}
   `(
     "should resolve relative path $from to $resolvedFrom",
     ({ alias, filename, from, resolvedFrom }) => {

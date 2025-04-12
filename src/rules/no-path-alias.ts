@@ -30,15 +30,6 @@ const isUsingAlias = (
   return Object.keys(alias).some((aliasKey) => importPath.startsWith(aliasKey));
 };
 
-const normalizeAlias = (alias: NoPathAliasRuleOptions["alias"]) => {
-  return Object.fromEntries(
-    Object.entries(alias).map(([key, value]) => {
-      const newKey = key.replace(/\/\*$/, "");
-      return [newKey, value.replace(/\/\*$/, "")];
-    }),
-  );
-};
-
 const resolveRelativePath = ({
   filename,
   aliasImportPath,
@@ -54,10 +45,9 @@ const resolveRelativePath = ({
   if (!aliasKey) {
     return aliasImportPath;
   }
-  const aliasPath = alias[aliasKey];
   const relativePath = path.relative(
     path.dirname(filename),
-    path.join(aliasPath, aliasImportPath.slice(aliasKey.length)),
+    path.join(alias[aliasKey], aliasImportPath.slice(aliasKey.length)),
   );
   return relativePath.startsWith(".") ? relativePath : `./${relativePath}`;
 };
@@ -82,17 +72,16 @@ export const noPathAliasRule: Rule.RuleModule = {
   },
   create(context) {
     const options = parseOptions(context.options);
-    const normalizedAlias = normalizeAlias(options.alias);
     return {
       ImportDeclaration(node: ImportDeclaration) {
         const importPath = node.source.value as string;
-        if (!isUsingAlias(importPath, normalizedAlias)) {
+        if (!isUsingAlias(importPath, options.alias)) {
           return;
         }
         const relativePath = resolveRelativePath({
           filename: context.filename,
           aliasImportPath: importPath,
-          alias: normalizedAlias,
+          alias: options.alias,
         });
         context.report({
           node: node.source,
