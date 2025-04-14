@@ -1,6 +1,6 @@
 {
   "name": "@mkizka/eslint-plugin-relative-import",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "type": "module",
   "description": "ESLint plugin to enforce relative imports",
   "repository": {
