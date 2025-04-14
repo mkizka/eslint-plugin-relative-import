@@ -1,6 +1,6 @@
 import type { Rule } from "eslint";
 import type { ImportDeclaration } from "estree";
-import path from "path";
+import path from "path/posix";
 
 const isObject = (obj: unknown) => {
   return typeof obj === "object" && obj !== null;
